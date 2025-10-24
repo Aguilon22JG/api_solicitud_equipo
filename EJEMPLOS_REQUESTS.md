@@ -6,19 +6,19 @@ Base URL: http://localhost:3000/api
 Content-Type: application/json
 ```
 
-## 🏥 Health Check
+## Health Check
 ```http
 GET http://localhost:3000/health
 ```
 
-## 📋 API Info
+## API Info
 ```http
 GET http://localhost:3000/api
 ```
 
 ---
 
-## 🔧 EQUIPOS
+## EQUIPOS
 
 ### Listar todos los equipos
 ```http
@@ -66,7 +66,7 @@ DELETE http://localhost:3000/api/equipos/1
 
 ---
 
-## 👨‍🏫 CATEDRÁTICOS
+## CATEDRÁTICOS
 
 ### Listar catedráticos
 ```http
@@ -104,7 +104,7 @@ Content-Type: application/json
 
 ---
 
-## 👩‍💼 RECEPCIONISTAS
+## RECEPCIONISTAS
 
 ### Listar recepcionistas
 ```http
@@ -125,7 +125,7 @@ Content-Type: application/json
 
 ---
 
-## 🏫 AULAS
+## AULAS
 
 ### Listar aulas
 ```http
@@ -145,7 +145,7 @@ Content-Type: application/json
 
 ---
 
-## 🎓 CARRERAS
+## CARRERAS
 
 ### Listar carreras
 ```http
@@ -164,7 +164,7 @@ Content-Type: application/json
 
 ---
 
-## 📚 CURSOS
+## CURSOS
 
 ### Listar cursos con sus relaciones
 ```http
@@ -185,7 +185,7 @@ Content-Type: application/json
 
 ---
 
-## 📝 ÓRDENES
+## ÓRDENES
 
 ### Listar todas las órdenes
 ```http
@@ -305,7 +305,7 @@ DELETE http://localhost:3000/api/ordenes/1
 
 ---
 
-## 🔍 CASOS DE USO COMPLETOS
+## CASOS DE USO COMPLETOS
 
 ### 1. Flujo completo: Crear solicitud de préstamo
 
@@ -388,7 +388,7 @@ Content-Type: application/json
 
 ---
 
-## 📊 REPORTES Y CONSULTAS
+## REPORTES Y CONSULTAS
 
 ### Órdenes por catedrático
 ```http
@@ -412,7 +412,7 @@ GET http://localhost:3000/api/ordenes
 
 ---
 
-## ⚠️ CASOS DE ERROR
+## CASOS DE ERROR
 
 ### Intentar crear orden con equipo inexistente
 ```http
@@ -472,7 +472,7 @@ Content-Type: application/json
 
 ---
 
-## 🧪 TESTING
+## TESTING
 
 Para probar estos endpoints puedes usar:
 

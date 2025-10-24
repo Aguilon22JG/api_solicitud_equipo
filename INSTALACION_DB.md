@@ -1,10 +1,10 @@
-# 🗄️ Guía de Instalación y Configuración de MariaDB
+# Guía de Instalación y Configuración de MariaDB
 
-## 📋 Requisitos Previos
+## Requisitos Previos
 
 Antes de ejecutar la API, necesitas tener MariaDB instalado y configurado.
 
-## 🚀 Instalación de MariaDB en Windows
+## Instalación de MariaDB en Windows
 
 ### Opción 1: Instalación directa de MariaDB
 
@@ -49,7 +49,7 @@ docker run --name mariadb-equipo \
   -d mariadb:latest
 ```
 
-## ⚙️ Configuración de la Base de Datos
+## Configuración de la Base de Datos
 
 ### 1. Conectar a MariaDB
 
@@ -123,7 +123,7 @@ npm run seed
 npm run dev
 ```
 
-## 🔍 Verificación
+## Verificación
 
 ### 1. Verificar tablas creadas
 ```sql
@@ -193,7 +193,7 @@ WHERE table_schema='equipo_universidad'
 GROUP BY table_schema;
 ```
 
-## 🔒 Configuración de Seguridad (Producción)
+## Configuración de Seguridad (Producción)
 
 ### 1. Crear usuario específico
 ```sql
@@ -210,7 +210,7 @@ SET GLOBAL max_connections = 50;
 SET GLOBAL max_user_connections = 20;
 ```
 
-## 🐛 Solución de Problemas Comunes
+## Solución de Problemas Comunes
 
 ### Error: "Can't connect to MySQL server"
 - Verificar que MariaDB esté ejecutándose
@@ -234,7 +234,7 @@ netstat -ano | findstr 3306
 DB_PORT=3307
 ```
 
-## 📱 Herramientas Recomendadas
+## Herramientas Recomendadas
 
 ### Clientes GUI para MariaDB:
 1. **phpMyAdmin** (incluido en XAMPP)
@@ -247,7 +247,7 @@ DB_PORT=3307
 2. **Insomnia** (gratis)
 3. **VS Code REST Client** (extensión)
 
-## 🎯 Siguientes Pasos
+## Siguientes Pasos
 
 Una vez configurado todo:
 
