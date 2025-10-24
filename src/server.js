@@ -51,25 +51,25 @@ const startServer = async () => {
   try {
     // Probar conexión a la base de datos
     await sequelize.authenticate();
-    console.log('✅ Conexión a la base de datos establecida correctamente.');
+    console.log('- Conexión a la base de datos establecida correctamente.');
 
     // Sincronizar modelos (solo en desarrollo)
     if (process.env.NODE_ENV === 'development') {
       await sequelize.sync({ alter: false });
-      console.log('✅ Modelos sincronizados con la base de datos.');
+      console.log('- Modelos sincronizados con la base de datos.');
     }
 
     // Iniciar servidor
     const PORT = process.env.PORT || 3000;
     app.listen(PORT, () => {
-      console.log(`🚀 Servidor ejecutándose en puerto ${PORT}`);
-      console.log(`📝 API disponible en: http://localhost:${PORT}/api`);
-      console.log(`❤️  Health check: http://localhost:${PORT}/health`);
-      console.log(`🌟 Ambiente: ${process.env.NODE_ENV || 'development'}`);
+      console.log(`- Servidor ejecutándose en puerto ${PORT}`);
+      console.log(`- API disponible en: http://localhost:${PORT}/api`);
+      console.log(`- Health check: http://localhost:${PORT}/health`);
+      console.log(`- Ambiente: ${process.env.NODE_ENV || 'development'}`);
     });
 
   } catch (error) {
-    console.error('❌ Error al iniciar el servidor:', error);
+    console.error('¡Error! al iniciar el servidor:', error);
     process.exit(1);
   }
 };
