@@ -2,7 +2,7 @@
 
 Una API REST desarrollada en Node.js con Express y MariaDB para gestionar órdenes de préstamo de equipos en universidades.
 
-## 🚀 Características
+## Características
 
 - **CRUD completo** para todas las entidades
 - **Validaciones robustas** con express-validator
@@ -13,7 +13,7 @@ Una API REST desarrollada en Node.js con Express y MariaDB para gestionar órden
 - **Soft delete** para entidades principales
 - **Documentación** completa de endpoints
 
-## 📋 Entidades del Sistema
+## Entidades del Sistema
 
 ### Principales
 - **Equipos**: Inventario de equipos disponibles
@@ -32,7 +32,7 @@ Una API REST desarrollada en Node.js con Express y MariaDB para gestionar órden
 - Una **Orden** pertenece a un **Aula** y un **Curso**
 - Una **Orden** puede tener muchos **Items** (equipos)
 
-## 🛠️ Stack Tecnológico
+## Stack Tecnológico
 
 - **Node.js** - Runtime de JavaScript
 - **Express** - Framework web
@@ -43,7 +43,7 @@ Una API REST desarrollada en Node.js con Express y MariaDB para gestionar órden
 - **cors** - Cross-Origin Resource Sharing
 - **dotenv** - Variables de entorno
 
-## 📦 Instalación
+## Instalación
 
 1. **Clonar el repositorio**
 ```bash
@@ -94,7 +94,7 @@ npm run dev
 npm start
 ```
 
-## 📚 Endpoints de la API
+## Endpoints de la API
 
 ### Base URL: `http://localhost:3000/api`
 
@@ -148,7 +148,7 @@ npm start
 - `PUT /ordenes/:id/status` - Actualizar estado de orden
 - `DELETE /ordenes/:id` - Cancelar orden
 
-## 📝 Ejemplos de Uso
+## Ejemplos de Uso
 
 ### Crear un Equipo
 ```bash
@@ -199,7 +199,7 @@ Content-Type: application/json
 }
 ```
 
-## 📊 Parámetros de Consulta
+## Parámetros de Consulta
 
 ### Paginación
 - `page` - Número de página (default: 1)
@@ -213,7 +213,7 @@ Ejemplo:
 GET /api/equipos?page=2&limit=5&status=1
 ```
 
-## 🔒 Estados del Sistema
+## Estados del Sistema
 
 ### Estados de Equipos/Entidades
 - `0` - Inactivo
@@ -231,7 +231,7 @@ GET /api/equipos?page=2&limit=5&status=1
 - `1` - Aprobada
 - `2` - Rechazada
 
-## 🚨 Manejo de Errores
+## Manejo de Errores
 
 La API retorna errores en formato JSON:
 
@@ -250,7 +250,7 @@ La API retorna errores en formato JSON:
 - `404` - No encontrado
 - `500` - Error interno del servidor
 
-## 🧪 Scripts Disponibles
+## Scripts Disponibles
 
 ```bash
 # Desarrollo con recarga automática
@@ -272,7 +272,7 @@ npm run seed
 npm test
 ```
 
-## 🗄️ Estructura del Proyecto
+## Estructura del Proyecto
 
 ```
 api_equipo/
@@ -297,7 +297,7 @@ api_equipo/
 └── package.json         # Dependencias y scripts
 ```
 
-## 🤝 Contribución
+## Contribución
 
 1. Fork el proyecto
 2. Crea una rama para tu feature (`git checkout -b feature/nueva-caracteristica`)
@@ -305,11 +305,11 @@ api_equipo/
 4. Push a la rama (`git push origin feature/nueva-caracteristica`)
 5. Crear un Pull Request
 
-## 📄 Licencia
+## Licencia
 
 Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE.md](LICENSE.md) para detalles.
 
-## 📞 Soporte
+## Soporte
 
 Si tienes preguntas o necesitas ayuda:
 
@@ -319,4 +319,4 @@ Si tienes preguntas o necesitas ayuda:
 
 ---
 
-**Desarrollado con ❤️ para la gestión eficiente de equipos universitarios**
+**Desarrollado por Javier García para la solicitud eficiente de equipos universitarios**
