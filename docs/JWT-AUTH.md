@@ -2,11 +2,11 @@
 
 Esta guía explica cómo utilizar el sistema de autenticación JWT implementado en la API.
 
-## 🔐 Sistema de Autenticación
+## Sistema de Autenticación
 
 El sistema utiliza JSON Web Tokens (JWT) para la autenticación y autorización de usuarios. Incluye tokens de acceso y refresh tokens para mayor seguridad.
 
-## 🚀 Configuración Inicial
+## Configuración Inicial
 
 ### Variables de Entorno Required
 ```env
@@ -24,7 +24,7 @@ prof.perez / password123 (Catedrático)
 prof.lopez / password123 (Catedrático)
 ```
 
-## 📡 Endpoints de Autenticación
+## Endpoints de Autenticación
 
 ### 1. Login
 ```http
@@ -92,7 +92,7 @@ POST /api/auth/logout
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 ```
 
-## 🛡️ Roles y Permisos
+## Roles y Permisos
 
 ### Administrador
 - **Puede hacer:** Todo en el sistema
@@ -118,7 +118,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
   - Ver sus propias órdenes
   - Consultar equipos disponibles
 
-## 🔒 Uso de Tokens
+## Uso de Tokens
 
 ### Headers Required
 Todas las rutas protegidas requieren el header:
@@ -147,7 +147,7 @@ fetch('/api/equipos', {
 .then(data => console.log(data));
 ```
 
-## ⚠️ Manejo de Errores de Autenticación
+## Manejo de Errores de Autenticación
 
 ### Token Expirado (401)
 ```json
@@ -226,7 +226,7 @@ if (equiposResponse.status === 401) {
 }
 ```
 
-## 🛠️ Middleware de Autenticación
+## Middleware de Autenticación
 
 El sistema incluye varios middleware de autorización:
 
@@ -249,7 +249,7 @@ Verifica que un catedrático solo acceda a sus propios recursos.
 ### `authorizeRecepcionista`  
 Permisos específicos para recepcionistas.
 
-## 🔧 Implementación en Rutas
+## Implementación en Rutas
 
 ```javascript
 // Ruta pública
@@ -273,7 +273,7 @@ router.get('/usuarios',
 );
 ```
 
-## 📱 Integración Frontend
+## Integración Frontend
 
 ### React Hooks Example:
 ```javascript
@@ -310,7 +310,7 @@ const useAuth = () => {
 };
 ```
 
-## 🔍 Debugging Tips
+## Debugging Tips
 
 ### Verificar Token
 ```javascript
@@ -330,7 +330,7 @@ El servidor logea información útil:
 [AUTH] Usuario sin permisos para /api/usuarios
 ```
 
-## ⚙️ Configuración de Seguridad
+## Configuración de Seguridad
 
 ### Recomendaciones de Producción:
 1. **JWT_SECRET**: Usar una clave de al menos 32 caracteres

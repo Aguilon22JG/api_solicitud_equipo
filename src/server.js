@@ -60,12 +60,10 @@ const startServer = async () => {
     }
 
     // Iniciar servidor
-    const PORT = process.env.PORT || 3000;
+    const PORT = process.env.PORT;
     app.listen(PORT, () => {
       console.log(`- Servidor ejecutándose en puerto ${PORT}`);
       console.log(`- API disponible en: http://localhost:${PORT}/api`);
-      console.log(`- Health check: http://localhost:${PORT}/health`);
-      console.log(`- Ambiente: ${process.env.NODE_ENV || 'development'}`);
     });
 
   } catch (error) {

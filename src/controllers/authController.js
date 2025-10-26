@@ -3,7 +3,7 @@ const { Usuario, Rol, Catedratico, Recepcionista } = require('../models');
 const { validationResult } = require('express-validator');
 
 const authController = {
-  // POST /api/auth/login - Iniciar sesión
+  // POST - Iniciar sesión
   async login(req, res) {
     try {
       const errors = validationResult(req);
@@ -17,7 +17,7 @@ const authController = {
 
       const { username, password } = req.body;
 
-      // Buscar usuario con sus relaciones
+      // Buscar usuario y los datos
       const usuario = await Usuario.findOne({
         where: { username, status: 1 },
         include: [
@@ -100,7 +100,7 @@ const authController = {
     }
   },
 
-  // POST /api/auth/register - Registrar nuevo usuario (solo administradores)
+  // POST - Registrar nuevo usuario (solo administradores)
   async register(req, res) {
     try {
       const errors = validationResult(req);
@@ -198,7 +198,7 @@ const authController = {
     }
   },
 
-  // POST /api/auth/refresh - Renovar token
+  // POST - Renovar token
   async refresh(req, res) {
     try {
       const { refreshToken } = req.body;
@@ -262,7 +262,7 @@ const authController = {
     }
   },
 
-  // POST /api/auth/change-password - Cambiar contraseña
+  // POST - Cambiar contraseña
   async changePassword(req, res) {
     try {
       const errors = validationResult(req);
@@ -312,7 +312,7 @@ const authController = {
     }
   },
 
-  // GET /api/auth/me - Obtener datos del usuario autenticado
+  // Obtener datos del usuario logeado
   async me(req, res) {
     try {
       const usuario = await Usuario.findByPk(req.user.id, {
