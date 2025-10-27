@@ -22,7 +22,7 @@ const authenticateToken = async (req, res, next) => {
       include: [{
         model: Rol,
         as: 'rol',
-        attributes: ['name']
+        attributes: ['id', 'name']
       }]
     });
 
@@ -68,8 +68,8 @@ const authenticateToken = async (req, res, next) => {
   }
 };
 
-// Middleware para verificar roles específicos
-const authorize = (...roles) => {
+// Middleware para verificar roles específicos por ID
+const authorize = (...roleIds) => {
   return (req, res, next) => {
     if (!req.user) {
       return res.status(401).json({
@@ -78,12 +78,13 @@ const authorize = (...roles) => {
       });
     }
 
-    if (!roles.includes(req.user.rol_name)) {
+    if (!roleIds.includes(req.user.rol_id)) {
       return res.status(403).json({
         success: false,
         message: 'No tienes permisos para realizar esta acción',
-        requiredRoles: roles,
-        userRole: req.user.rol_name
+        requiredRoleIds: roleIds,
+        userRoleId: req.user.rol_id,
+        userRoleName: req.user.rol_name
       });
     }
 
@@ -91,11 +92,18 @@ const authorize = (...roles) => {
   };
 };
 
+// Constantes de roles para referencia
+const ROLES = {
+  ADMINISTRADOR: 1,
+  RECEPCIONISTA: 2,
+  CATEDRATICO: 3
+};
+
 // Middleware para verificar que el usuario es propietario del recurso
 const authorizeOwner = (req, res, next) => {
   const resourceUserId = req.params.userId || req.body.userId;
   
-  if (req.user.rol_name === 'Administrador') {
+  if (req.user.rol_id === ROLES.ADMINISTRADOR) {
     return next(); // Los administradores pueden acceder a todo
   }
 
@@ -111,11 +119,11 @@ const authorizeOwner = (req, res, next) => {
 
 // Middleware para verificar que el catedrático solo accede a sus recursos
 const authorizeCatedratico = (req, res, next) => {
-  if (req.user.rol_name === 'Administrador') {
+  if (req.user.rol_id === ROLES.ADMINISTRADOR) {
     return next(); // Los administradores pueden acceder a todo
   }
 
-  if (req.user.rol_name === 'Catedrático') {
+  if (req.user.rol_id === ROLES.CATEDRATICO) {
     // El catedrático solo puede acceder a sus propias órdenes
     const catedraticoId = req.params.catedraticoId || req.body.catedratico_id;
     
@@ -132,11 +140,11 @@ const authorizeCatedratico = (req, res, next) => {
 
 // Middleware para verificar que el recepcionista puede gestionar entregas
 const authorizeRecepcionista = (req, res, next) => {
-  if (req.user.rol_name === 'Administrador') {
+  if (req.user.rol_id === ROLES.ADMINISTRADOR) {
     return next(); // Los administradores pueden acceder a todo
   }
 
-  if (req.user.rol_name === 'Recepcionista') {
+  if (req.user.rol_id === ROLES.RECEPCIONISTA) {
     // Los recepcionistas pueden gestionar entregas y recepciones
     return next();
   }
@@ -159,7 +167,7 @@ const optionalAuth = async (req, res, next) => {
         include: [{
           model: Rol,
           as: 'rol',
-          attributes: ['name']
+          attributes: ['id', 'name']
         }]
       });
 
@@ -189,5 +197,6 @@ module.exports = {
   authorizeOwner,
   authorizeCatedratico,
   authorizeRecepcionista,
-  optionalAuth
+  optionalAuth,
+  ROLES
 };

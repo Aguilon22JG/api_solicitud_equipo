@@ -3,7 +3,7 @@ const router = express.Router();
 const { validationResult } = require('express-validator');
 const usuarioController = require('../controllers/usuarioController');
 const validationRules = require('../middleware/validation');
-const { authenticateToken, authorize } = require('../middleware/auth');
+const { authenticateToken, authorize, ROLES } = require('../middleware/auth');
 
 // Middleware para manejar errores de validación
 const handleValidationErrors = (req, res, next) => {
@@ -22,7 +22,7 @@ const handleValidationErrors = (req, res, next) => {
 router.use(authenticateToken);
 
 // Las siguientes rutas requieren permisos de administrador
-router.use(authorize(['Administrador']));
+router.use(authorize(ROLES.ADMINISTRADOR));
 
 // Obtener todos los usuarios
 router.get('/', usuarioController.getAll);

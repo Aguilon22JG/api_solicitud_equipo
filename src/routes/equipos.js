@@ -3,7 +3,7 @@ const router = express.Router();
 const { validationResult } = require('express-validator');
 const equipoController = require('../controllers/equipoController');
 const validationRules = require('../middleware/validation');
-const { authenticateToken, authorize } = require('../middleware/auth');
+const { authenticateToken, authorize, ROLES } = require('../middleware/auth');
 
 // Middleware para manejar errores de validación
 const handleValidationErrors = (req, res, next) => {
@@ -28,7 +28,7 @@ router.get('/', equipoController.getAll);
 router.get('/:id', equipoController.getById);
 
 // Las siguientes rutas requieren permisos de administrador o recepcionista
-router.use(authorize(['Administrador', 'Recepcionista']));
+router.use(authorize(ROLES.ADMINISTRADOR, ROLES.RECEPCIONISTA));
 
 // POST /api/equipos - Crear un nuevo equipo
 router.post('/', validationRules.equipo, handleValidationErrors, equipoController.create);

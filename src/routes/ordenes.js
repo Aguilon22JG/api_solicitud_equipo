@@ -3,7 +3,7 @@ const router = express.Router();
 const { validationResult } = require('express-validator');
 const ordenController = require('../controllers/ordenController');
 const validationRules = require('../middleware/validation');
-const { authenticateToken, authorize, authorizeCatedratico, authorizeRecepcionista } = require('../middleware/auth');
+const { authenticateToken, authorize, authorizeCatedratico, authorizeRecepcionista, ROLES } = require('../middleware/auth');
 
 // Middleware para manejar errores de validación
 const handleValidationErrors = (req, res, next) => {
@@ -22,14 +22,14 @@ const handleValidationErrors = (req, res, next) => {
 router.use(authenticateToken);
 
 // GET /api/ordenes - Obtener todas las órdenes (admin y recepcionistas ven todas, catedráticos solo las suyas)
-router.get('/', authorize(['Administrador', 'Recepcionista', 'Catedrático']), ordenController.getAll);
+router.get('/', authorize(ROLES.ADMINISTRADOR, ROLES.RECEPCIONISTA, ROLES.CATEDRATICO), ordenController.getAll);
 
 // GET /api/ordenes/:id - Obtener una orden por ID (con verificación de propiedad para catedráticos)
-router.get('/:id', authorize(['Administrador', 'Recepcionista', 'Catedrático']), ordenController.getById);
+router.get('/:id', authorize(ROLES.ADMINISTRADOR, ROLES.RECEPCIONISTA, ROLES.CATEDRATICO), ordenController.getById);
 
 // POST /api/ordenes - Crear una nueva orden (solo catedráticos y administradores)
 router.post('/', 
-  authorize(['Administrador', 'Catedrático']), 
+  authorize(ROLES.ADMINISTRADOR, ROLES.CATEDRATICO), 
   validationRules.orden, 
   handleValidationErrors, 
   ordenController.create
@@ -37,7 +37,7 @@ router.post('/',
 
 // PUT /api/ordenes/:id - Actualizar una orden (solo catedráticos propietarios y administradores)
 router.put('/:id', 
-  authorize(['Administrador', 'Catedrático']), 
+  authorize(ROLES.ADMINISTRADOR, ROLES.CATEDRATICO), 
   validationRules.orden, 
   handleValidationErrors, 
   ordenController.update
@@ -45,7 +45,7 @@ router.put('/:id',
 
 // PUT /api/ordenes/:id/status - Actualizar estado de la orden (recepcionistas y administradores)
 router.put('/:id/status', 
-  authorize(['Administrador', 'Recepcionista']), 
+  authorize(ROLES.ADMINISTRADOR, ROLES.RECEPCIONISTA), 
   validationRules.ordenStatus, 
   handleValidationErrors, 
   ordenController.updateStatus
@@ -53,7 +53,7 @@ router.put('/:id/status',
 
 // DELETE /api/ordenes/:id - Cancelar una orden (catedráticos propietarios y administradores)
 router.delete('/:id', 
-  authorize(['Administrador', 'Catedrático']), 
+  authorize(ROLES.ADMINISTRADOR, ROLES.CATEDRATICO), 
   ordenController.cancel
 );
 
