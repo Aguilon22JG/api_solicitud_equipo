@@ -30,7 +30,13 @@ const ordenController = {
           },
           {
             model: Recepcionista,
-            as: 'recepcionista',
+            as: 'recepcionista_entrega',
+            attributes: ['id', 'first_name', 'last_name', 'phone'],
+            required: false
+          },
+          {
+            model: Recepcionista,
+            as: 'recepcionista_recibe',
             attributes: ['id', 'first_name', 'last_name', 'phone'],
             required: false
           },
@@ -91,7 +97,13 @@ const ordenController = {
           },
           {
             model: Recepcionista,
-            as: 'recepcionista',
+            as: 'recepcionista_entrega',
+            attributes: ['id', 'first_name', 'last_name', 'phone'],
+            required: false
+          },
+          {
+            model: Recepcionista,
+            as: 'recepcionista_recibe',
             attributes: ['id', 'first_name', 'last_name', 'phone'],
             required: false
           },
@@ -277,7 +289,13 @@ const ordenController = {
           },
           {
             model: Recepcionista,
-            as: 'recepcionista',
+            as: 'recepcionista_entrega',
+            attributes: ['id', 'first_name', 'last_name'],
+            required: false
+          },
+          {
+            model: Recepcionista,
+            as: 'recepcionista_recibe',
             attributes: ['id', 'first_name', 'last_name'],
             required: false
           },
@@ -348,7 +366,13 @@ const ordenController = {
           },
           {
             model: Recepcionista,
-            as: 'recepcionista',
+            as: 'recepcionista_entrega',
+            attributes: ['id', 'first_name', 'last_name'],
+            required: false
+          },
+          {
+            model: Recepcionista,
+            as: 'recepcionista_recibe',
             attributes: ['id', 'first_name', 'last_name'],
             required: false
           }

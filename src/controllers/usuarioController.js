@@ -9,15 +9,20 @@ const usuarioController = {
         include: [
           {
             model: Rol,
+            as: 'rol',
             attributes: ['id', 'name', 'description']
           },
           {
             model: Catedratico,
-            attributes: ['id', 'first_name', 'last_name', 'phone']
+            as: 'catedratico',
+            attributes: ['id', 'first_name', 'last_name', 'phone'],
+            required: false
           },
           {
             model: Recepcionista,
-            attributes: ['id', 'first_name', 'last_name', 'phone']
+            as: 'recepcionista',
+            attributes: ['id', 'first_name', 'last_name', 'phone'],
+            required: false
           }
         ],
         attributes: { exclude: ['password'] },
@@ -48,15 +53,20 @@ const usuarioController = {
         include: [
           {
             model: Rol,
+            as: 'rol',
             attributes: ['id', 'name', 'description']
           },
           {
             model: Catedratico,
-            attributes: ['id', 'first_name', 'last_name', 'phone']
+            as: 'catedratico',
+            attributes: ['id', 'first_name', 'last_name', 'phone'],
+            required: false
           },
           {
             model: Recepcionista,
-            attributes: ['id', 'first_name', 'last_name', 'phone']
+            as: 'recepcionista',
+            attributes: ['id', 'first_name', 'last_name', 'phone'],
+            required: false
           }
         ],
         attributes: { exclude: ['password'] }
@@ -161,15 +171,20 @@ const usuarioController = {
         include: [
           {
             model: Rol,
+            as: 'rol',
             attributes: ['id', 'name', 'description']
           },
           {
             model: Catedratico,
-            attributes: ['id', 'first_name', 'last_name', 'phone']
+            as: 'catedratico',
+            attributes: ['id', 'first_name', 'last_name', 'phone'],
+            required: false
           },
           {
             model: Recepcionista,
-            attributes: ['id', 'first_name', 'last_name', 'phone']
+            as: 'recepcionista',
+            attributes: ['id', 'first_name', 'last_name', 'phone'],
+            required: false
           }
         ],
         attributes: { exclude: ['password'] }
@@ -266,15 +281,20 @@ const usuarioController = {
         include: [
           {
             model: Rol,
+            as: 'rol',
             attributes: ['id', 'name', 'description']
           },
           {
             model: Catedratico,
-            attributes: ['id', 'first_name', 'last_name', 'phone']
+            as: 'catedratico',
+            attributes: ['id', 'first_name', 'last_name', 'phone'],
+            required: false
           },
           {
             model: Recepcionista,
-            attributes: ['id', 'first_name', 'last_name', 'phone']
+            as: 'recepcionista',
+            attributes: ['id', 'first_name', 'last_name', 'phone'],
+            required: false
           }
         ],
         attributes: { exclude: ['password'] }

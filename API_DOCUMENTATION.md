@@ -177,9 +177,7 @@ Authorization: Bearer <token>
   "email": "usuario@universidad.edu",
   "password": "password123",
   "rol_id": 2,
-  "catedratico_id": null,
-  "recepcionista_id": 1,
-  "status": 1
+  "recepcionista_id": 1
 }
 ```
 
