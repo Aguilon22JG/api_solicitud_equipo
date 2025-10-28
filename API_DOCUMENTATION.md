@@ -543,15 +543,16 @@ Authorization: Bearer <token>
 ### Request Body:
 ```json
 {
+  "catedratico_id": 1,
   "aula_id": 1,
   "curso_id": 1,
-  "recepcionista1_id": 1,
-  "recepcionista2_id": 2,
-  "fecha_uso": "2025-10-30T08:00:00.000Z",
-  "hora_inicio": "08:00:00",
-  "hora_fin": "10:00:00",
-  "observaciones": "Clase de programación básica",
-  "equipos": [
+  "recepcionista_entrega_id": 1,
+  "recepcionista_recibe_id": 2,
+  "date_use": "2025-10-30",
+  "start_time": "08:00:00",
+  "end_time": "10:00:00",
+  "note": "Clase de programación básica",
+  "items": [
     {
       "equipo_id": 1,
       "quantity": 1

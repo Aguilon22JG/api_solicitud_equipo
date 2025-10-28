@@ -166,11 +166,33 @@ const ordenController = {
         });
       }
 
-      const { items, ...ordenData } = req.body;
+      const { items, equipos, ...reqData } = req.body;
+      
+      // Mapear campos del español al inglés si es necesario
+      const ordenData = {
+        ...reqData,
+        note: reqData.note || reqData.observaciones,
+        date_use: reqData.date_use || reqData.fecha_uso,
+        start_time: reqData.start_time || reqData.hora_inicio,
+        end_time: reqData.end_time || reqData.hora_fin,
+        recepcionista_entrega_id: reqData.recepcionista_entrega_id || reqData.recepcionista1_id,
+        recepcionista_recibe_id: reqData.recepcionista_recibe_id || reqData.recepcionista2_id
+      };
+      
+      // Asegurar que las horas tengan formato completo HH:MM:SS
+      if (ordenData.start_time && !ordenData.start_time.includes(':00', 5)) {
+        ordenData.start_time += ':00';
+      }
+      if (ordenData.end_time && !ordenData.end_time.includes(':00', 5)) {
+        ordenData.end_time += ':00';
+      }
+      
+      // Usar equipos o items (ambos nombres soportados)
+      const orderItems = items || equipos;
 
         // Validar disponibilidad de equipos
-        if (items && items.length > 0) {
-          for (const item of items) {
+        if (orderItems && orderItems.length > 0) {
+          for (const item of orderItems) {
             const equipo = await Equipo.findByPk(item.equipo_id);
             if (!equipo) {
               return res.status(404).json({
@@ -189,12 +211,12 @@ const ordenController = {
       const orden = await Orden.create(ordenData);
 
         // Crear los items de la orden
-        if (items && items.length > 0) {
-          const orderItems = items.map(item => ({
+        if (orderItems && orderItems.length > 0) {
+          const orderItemsData = orderItems.map(item => ({
             ...item,
             orden_id: orden.id
           }));
-          await OrderItem.bulkCreate(orderItems);
+          await OrderItem.bulkCreate(orderItemsData);
         }      // Obtener la orden completa con sus relaciones
       const ordenCompleta = await Orden.findByPk(orden.id, {
         include: [

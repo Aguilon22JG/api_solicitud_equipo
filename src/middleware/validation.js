@@ -125,35 +125,93 @@ const validationRules = {
 
   // Validaciones para Orden
   orden: [
+    // Validación para nota/observaciones
     body('note')
       .optional()
       .isLength({ max: 1000 })
       .withMessage('La nota no puede exceder 1000 caracteres'),
+    body('observaciones')
+      .optional()
+      .isLength({ max: 1000 })
+      .withMessage('Las observaciones no pueden exceder 1000 caracteres'),
+    
+    // Validaciones de fecha (ambos formatos)
     body('date_use')
+      .if(body('fecha_uso').not().exists())
       .notEmpty()
       .withMessage('La fecha de uso es requerida')
       .isDate()
       .withMessage('La fecha debe tener un formato válido (YYYY-MM-DD)')
       .custom((value) => {
+        // Obtener fecha de hoy en formato YYYY-MM-DD
         const today = new Date();
-        const useDate = new Date(value);
-        if (useDate < today.setHours(0, 0, 0, 0)) {
+        const todayString = today.getFullYear() + '-' + 
+          String(today.getMonth() + 1).padStart(2, '0') + '-' + 
+          String(today.getDate()).padStart(2, '0');
+        
+        // Comparar directamente las cadenas de fecha
+        if (value < todayString) {
           throw new Error('La fecha de uso no puede ser anterior a hoy');
         }
         return true;
       }),
+    body('fecha_uso')
+      .if(body('date_use').not().exists())
+      .notEmpty()
+      .withMessage('La fecha de uso es requerida')
+      .isDate()
+      .withMessage('La fecha debe tener un formato válido (YYYY-MM-DD)')
+      .custom((value) => {
+        // Obtener fecha de hoy en formato YYYY-MM-DD
+        const today = new Date();
+        const todayString = today.getFullYear() + '-' + 
+          String(today.getMonth() + 1).padStart(2, '0') + '-' + 
+          String(today.getDate()).padStart(2, '0');
+        
+        // Comparar directamente las cadenas de fecha
+        if (value < todayString) {
+          throw new Error('La fecha de uso no puede ser anterior a hoy');
+        }
+        return true;
+      }),
+    
+    // Validaciones de hora inicio (ambos formatos)
     body('start_time')
+      .if(body('hora_inicio').not().exists())
       .notEmpty()
       .withMessage('La hora de inicio es requerida')
-      .matches(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$/)
-      .withMessage('La hora de inicio debe tener formato HH:MM:SS'),
+      .matches(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9](:[0-5][0-9])?$/)
+      .withMessage('La hora de inicio debe tener formato HH:MM o HH:MM:SS'),
+    body('hora_inicio')
+      .if(body('start_time').not().exists())
+      .notEmpty()
+      .withMessage('La hora de inicio es requerida')
+      .matches(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9](:[0-5][0-9])?$/)
+      .withMessage('La hora de inicio debe tener formato HH:MM o HH:MM:SS'),
+    
+    // Validaciones de hora fin (ambos formatos)
     body('end_time')
+      .if(body('hora_fin').not().exists())
       .notEmpty()
       .withMessage('La hora de fin es requerida')
-      .matches(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$/)
-      .withMessage('La hora de fin debe tener formato HH:MM:SS')
+      .matches(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9](:[0-5][0-9])?$/)
+      .withMessage('La hora de fin debe tener formato HH:MM o HH:MM:SS')
       .custom((value, { req }) => {
-        if (req.body.start_time && value <= req.body.start_time) {
+        const startTime = req.body.start_time;
+        if (startTime && value <= startTime) {
+          throw new Error('La hora de fin debe ser posterior a la hora de inicio');
+        }
+        return true;
+      }),
+    body('hora_fin')
+      .if(body('end_time').not().exists())
+      .notEmpty()
+      .withMessage('La hora de fin es requerida')
+      .matches(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9](:[0-5][0-9])?$/)
+      .withMessage('La hora de fin debe tener formato HH:MM o HH:MM:SS')
+      .custom((value, { req }) => {
+        const startTime = req.body.hora_inicio;
+        if (startTime && value <= startTime) {
           throw new Error('La hora de fin debe ser posterior a la hora de inicio');
         }
         return true;
@@ -163,12 +221,29 @@ const validationRules = {
       .withMessage('El ID del catedrático es requerido')
       .isInt({ min: 1 })
       .withMessage('El ID del catedrático debe ser un número entero positivo'),
+    // Validaciones de aula (ambos formatos)
     body('aula_id')
+      .if(body('classroom_id').not().exists())
       .notEmpty()
-      .withMessage('El ID del aula es requerida')
+      .withMessage('El ID del aula es requerido')
       .isInt({ min: 1 })
       .withMessage('El ID del aula debe ser un número entero positivo'),
+    body('classroom_id')
+      .if(body('aula_id').not().exists())
+      .notEmpty()
+      .withMessage('El ID del aula es requerido')
+      .isInt({ min: 1 })
+      .withMessage('El ID del aula debe ser un número entero positivo'),
+    
+    // Validaciones de curso (ambos formatos)
     body('curso_id')
+      .if(body('course_id').not().exists())
+      .notEmpty()
+      .withMessage('El ID del curso es requerido')
+      .isInt({ min: 1 })
+      .withMessage('El ID del curso debe ser un número entero positivo'),
+    body('course_id')
+      .if(body('curso_id').not().exists())
       .notEmpty()
       .withMessage('El ID del curso es requerido')
       .isInt({ min: 1 })
